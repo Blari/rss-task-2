@@ -1,4 +1,4 @@
-const uuid = require('uuid');
+const uuid = require('uuid').v4;
 
 class User {
   constructor({
@@ -14,6 +14,11 @@ class User {
   }
 
   static toResponse(user) {
+    const { id, name, login } = user;
+    return { id, name, login };
+  }
+
+  static fromRequest(user) {
     const { id, name, login } = user;
     return { id, name, login };
   }
