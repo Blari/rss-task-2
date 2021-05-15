@@ -13,8 +13,25 @@ router.route('/').post(async (req, res) => {
 });
 
 router.route('/:id').get(async (req, res) => {
-  const user = await usersService.get(req.params.id, res);
-  res.status(200).send(User.toResponse(user));
+  const user = await usersService.get(req.params.id);
+  if (user) {
+    res.status(200).send(User.toResponse(user));
+  } else res.status(404).send(`User with id ${req.params.id} not found`);
+});
+
+router.route('/:id').put(async (req, res) => {
+  const user = await usersService.update(req.params.id, req.body);
+  if (user) {
+    res.status(200).send(User.toResponse(user));
+  } else res.status(404).send(`User with id ${req.params.id} not found`);
+});
+
+router.route('/:id').delete(async (req, res) => {
+  const user = await usersService.remove(req.params.id);
+
+  if (user) {
+    res.status(200).send(User.toResponse(user));
+  } else res.status(404).send(`User with id ${req.params.id} not found`);
 });
 
 module.exports = router;
