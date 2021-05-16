@@ -69,14 +69,14 @@ const create = async (board) => {
 //
 //   return Users[oldUserIndex];
 // };
-// const remove = async (id) => {
-//   if (Users.find(user => user.id === id)) {
-//     const oldUser = Users.find((el) => el.id === id);
-//     const oldUserIndex = Users.indexOf(oldUser);
-//     Users.splice(oldUserIndex, 1);
-//     return true;
-//   }
-//   return false;
-// };
+const remove = async (id) => {
+  if (Boards.find(board => board.id === id)) {
+    const oldUser = Boards.find((el) => el.id === id);
+    const oldUserIndex = Boards.indexOf(oldUser);
+    Boards.splice(oldUserIndex, 1);
+    return true;
+  }
+  return false;
+};
 
-module.exports = { getAll, get, create };
+module.exports = { getAll, get, create, remove };

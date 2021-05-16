@@ -19,13 +19,9 @@ class Board {
       {
         "columnID": this.columns[0].columnID,
         "columnTitle": this.columns[0].columnTitle,
-        "order": this.columns[0].order
+        "order": 0
       }
     ];
-  }
-
-  static toResponse(board) {
-    return board;
   }
 }
 
