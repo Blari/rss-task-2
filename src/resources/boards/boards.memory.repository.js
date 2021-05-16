@@ -77,4 +77,4 @@ const remove = async (id) => {
   return false;
 };
 
-module.exports = { getAll, get, create, remove, update };
+module.exports = { getAll, get, create, remove, update, Boards };
