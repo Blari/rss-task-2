@@ -8,8 +8,11 @@ router.route('/').get(async (req, res) => {
 });
 
 router.route('/').post(async (req, res) => {
-  const user = await boardsService.create(req.body);
-  res.status(201).send(Board.toResponse(user));
+  const board = await boardsService.create(req.body);
+  if (board) {
+    return res.status(201).header('The board has been created.').send(board);
+  }
+  return res.status(404).send('Bad request');
 });
 
 router.route('/:id').get(async (req, res) => {
