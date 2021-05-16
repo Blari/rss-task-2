@@ -3,7 +3,7 @@ const Task = require('./task.model');
 const taskService = require('./task.service');
 
 router.route('/').get(async (req, res) => {
-  const boardID = await taskService.getAll(+req.baseUrl.split('/')[2]);
+  const boardID = await taskService.getAll(req.baseUrl.split('/')[2]);
   if (boardID.length > 0) {
     res.status(200).send(Task.toResponse(boardID));
   } else {
@@ -17,8 +17,8 @@ router.route('/').post(async (req, res) => {
 });
 
 router.route('/:id').get(async (req, res) => {
-  const taskID = +req.params.id;
-  const boardID = +req.baseUrl.split('/')[2];
+  const taskID = req.params.id.toString();
+  const boardID = req.baseUrl.split('/')[2];
   const task = await taskService.get(boardID, taskID);
 
   if (task) {
@@ -27,18 +27,25 @@ router.route('/:id').get(async (req, res) => {
 });
 
 router.route('/:id').put(async (req, res) => {
-  const user = await taskService.update(req.params.id, req.body);
-  if (user) {
-    res.status(200).send(Task.toResponse(user));
-  } else res.status(400).send(`User with id ${req.params.id} not found`);
+  const taskID = req.params.id;
+  const boardID = req.baseUrl.split('/')[2];
+  const { body } = req;
+
+  const task = await taskService.update(boardID, taskID, body);
+
+  if (task) {
+    res.status(200).send(task);
+  } else res.status(404).send(`Task with id ${req.params.id} not found`);
 });
 
 router.route('/:id').delete(async (req, res) => {
-  const user = await taskService.remove(req.params.id);
+  const taskID = req.params.id;
+  const boardID = req.baseUrl.split('/')[2];
+  const task = await taskService.remove(boardID, taskID);
 
-  if (user) {
-    res.status(204).send('User has been delete');
-  } else res.status(404).send(`User with id ${req.params.id} not found`);
+  if (task) {
+    res.status(204).send('The task has been deleted');
+  } else res.status(404).send(`Task not found`);
 });
 
 module.exports = router;
