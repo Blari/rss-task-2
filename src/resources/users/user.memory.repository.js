@@ -1,24 +1,8 @@
 const User = require('./user.model');
+const Tasks = require('../tasks/task.memory.repository');
 
 const Users = [
-  {
-    id: '123',
-    name: 'USER1',
-    login: 'user',
-    password: 'P@55w0rd',
-  },
-  {
-    id: '234',
-    name: 'USER2',
-    login: 'user',
-    password: 'P@55w0rd',
-  },
-  {
-    id: '456',
-    name: 'USER3',
-    login: 'user',
-    password: 'P@55w0rd',
-  },
+
 ];
 
 const getAll = async () => Users;
@@ -42,8 +26,17 @@ const update = async (id, user) => {
 const remove = async (id) => {
   if (Users.find(user => user.id === id)) {
     const oldUser = Users.find((el) => el.id === id);
-    const oldUserIndex = Users.indexOf(oldUser);
-    Users.splice(oldUserIndex, 1);
+    const index = Users.indexOf(oldUser);
+    Users.splice(index, 1);
+
+    const tasksToRemove = Tasks.Tasks.filter(task => task.userId === id);
+
+    if (tasksToRemove.length > 0) {
+      tasksToRemove.forEach(task => {
+        // eslint-disable-next-line no-param-reassign
+        task.userId = null;
+      })
+    }
     return true;
   }
   return false;

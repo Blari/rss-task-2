@@ -1,30 +1,32 @@
 const uuid = require('uuid').v4;
 
-class User {
+class Task {
   constructor({
-    taskID = uuid(),
-    title = 'task title',
+    taskId = uuid(),
+    title = "string",
+    order = 0,
     description = "string",
     userId = "string",
     boardId = "string",
     columnId = "string"
   } = {}) {
-    this.taskID = taskID;
-    this.title = title;
+    this.taskId = taskId;
+    this.titke = title;
+    this.order = order;
     this.description = description;
-    this.userID = userId;
-    this.boardID = boardId;
-    this.columnID = columnId;
+    this.userId = userId;
+    this.boardId = boardId;
+    this.columnId = columnId;
   }
 
   static toResponse(tasks){
     const taskCleaned = [];
     tasks.forEach(el => {
-      const { id, title, order, description, userID } = el;
-      taskCleaned.push({ id, title, order, description, userID })
+      const { id, title, order, description, userId } = el;
+      taskCleaned.push({ id, title, order, description, userId })
     })
     return taskCleaned;
   }
 }
 
-module.exports = User;
+module.exports = Task;
