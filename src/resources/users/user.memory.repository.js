@@ -41,9 +41,12 @@ const update = async (id, user) => {
 };
 const remove = async (id) => {
   if (Users.find(user => user.id === id)) {
-    return id
+    const oldUser = Users.find((el) => el.id === id);
+    const oldUserIndex = Users.indexOf(oldUser);
+    Users.splice(oldUserIndex, 1);
+    return true;
   }
-  return id;
+  return false;
 };
 
 module.exports = { getAll, get, create, update, remove };

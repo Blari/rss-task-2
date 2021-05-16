@@ -1,33 +1,33 @@
 const router = require('express').Router();
-const User = require('./user.model');
-const usersService = require('./user.service');
+const Board = require('./boards.model');
+const boardsService = require('./boards.service');
 
 router.route('/').get(async (req, res) => {
-  const users = await usersService.getAll();
-  res.json(users.map(User.toResponse));
+  const board = await boardsService.getAll();
+  res.json(board.map(Board.toResponse));
 });
 
 router.route('/').post(async (req, res) => {
-  const user = await usersService.create(req.body);
-  res.status(201).send(User.toResponse(user));
+  const user = await boardsService.create(req.body);
+  res.status(201).send(Board.toResponse(user));
 });
 
 router.route('/:id').get(async (req, res) => {
-  const user = await usersService.get(req.params.id);
+  const user = await boardsService.get(req.params.id);
   if (user) {
-    res.status(200).send(User.toResponse(user));
+    res.status(200).send(Board.toResponse(user));
   } else res.status(404).send(`User with id ${req.params.id} not found`);
 });
 
 router.route('/:id').put(async (req, res) => {
-  const user = await usersService.update(req.params.id, req.body);
+  const user = await boardsService.update(req.params.id, req.body);
   if (user) {
-    res.status(200).send(User.toResponse(user));
+    res.status(200).send(Board.toResponse(user));
   } else res.status(400).send(`User with id ${req.params.id} not found`);
 });
 
 router.route('/:id').delete(async (req, res) => {
-  const user = await usersService.remove(req.params.id);
+  const user = await boardsService.remove(req.params.id);
 
   if (user) {
     res.status(204).send('User has been delete');
