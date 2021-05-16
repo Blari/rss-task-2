@@ -16,6 +16,15 @@ class User {
     this.boardID = boardId;
     this.columnID = columnId;
   }
+
+  static toResponse(tasks){
+    const taskCleaned = [];
+    tasks.forEach(el => {
+      const { id, title, order, description, userID } = el;
+      taskCleaned.push({ id, title, order, description, userID })
+    })
+    return taskCleaned;
+  }
 }
 
 module.exports = User;

@@ -1,3 +1,5 @@
+
+
 const Tasks = [
   {
     id: 1,
@@ -29,7 +31,7 @@ const Tasks = [
 ];
 
 const getAll = async (boardID) => Tasks.filter(el => el.boardId === boardID);
-// const get = async (id) => Users.find((user) => user.id === id);
+const get = async (boardID, taskID) => Tasks.filter(el => el.boardId === boardID).find(el => el.id === taskID);
 // const create = async (user) => {
 //   const newUser = new User(user);
 //   Users.push(newUser);
@@ -56,4 +58,4 @@ const getAll = async (boardID) => Tasks.filter(el => el.boardId === boardID);
 //   return false;
 // };
 
-module.exports = { getAll };
+module.exports = { getAll, get  };

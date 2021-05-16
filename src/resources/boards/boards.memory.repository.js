@@ -1,4 +1,4 @@
-const Board = require('./boards.model');
+const BoardModel = require('./boards.model');
 
 const Boards = [
   {
@@ -54,7 +54,7 @@ const Boards = [
 const getAll = async () => Boards;
 const get = async (id) => Boards.find((board) => board.id === id);
 const create = async (board) => {
-  const newBoard = new Board(board);
+  const newBoard = new BoardModel(board);
   Boards.push(newBoard);
   return newBoard;
 };
