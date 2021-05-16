@@ -1,33 +1,7 @@
 const TaskModel = require('./task.model');
 
 const Tasks = [
-  {
-    id: '1',
-    title: 'title1',
-    order: 0,
-    description: 'First Task',
-    userId: '1',
-    boardId: '1',
-    columnId: '1',
-  },
-  {
-    id: '2',
-    title: 'title2',
-    order: 1,
-    description: 'Second Task',
-    userId: '2',
-    boardId: '2',
-    columnId: '2',
-  },
-  {
-    id: '3',
-    title: 'title3',
-    order: 2,
-    description: 'Third Task',
-    userId: '2',
-    boardId: '2',
-    columnId: '1',
-  },
+
 ];
 
 const getAll = async (boardID) => Tasks.filter(el => el.boardId === boardID);

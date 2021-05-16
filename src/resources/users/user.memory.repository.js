@@ -2,24 +2,7 @@ const User = require('./user.model');
 const Tasks = require('../tasks/task.memory.repository');
 
 const Users = [
-  {
-    id: '1',
-    name: 'USER1',
-    login: 'user',
-    password: 'P@55w0rd',
-  },
-  {
-    id: '2',
-    name: 'USER2',
-    login: 'user',
-    password: 'P@55w0rd',
-  },
-  {
-    id: '3',
-    name: 'USER3',
-    login: 'user',
-    password: 'P@55w0rd',
-  },
+
 ];
 
 const getAll = async () => Users;
