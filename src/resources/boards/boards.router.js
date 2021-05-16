@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const Board = require('./boards.model');
 const boardsService = require('./boards.service');
 
 router.route('/').get(async (req, res) => {
@@ -23,10 +22,10 @@ router.route('/:id').get(async (req, res) => {
 });
 
 router.route('/:id').put(async (req, res) => {
-  const user = await boardsService.update(req.params.id, req.body);
-  if (user) {
-    res.status(200).send(Board.toResponse(user));
-  } else res.status(400).send(`User with id ${req.params.id} not found`);
+  const board = await boardsService.update(req.params.id, req.body);
+  if (board) {
+    res.status(200).send(board);
+  } else res.status(400).send(`Board with id ${req.params.id} not found`);
 });
 
 router.route('/:id').delete(async (req, res) => {

@@ -58,17 +58,15 @@ const create = async (board) => {
   Boards.push(newBoard);
   return newBoard;
 };
-// const update = async (id, user) => {
-//   const oldUser = Users.find((el) => el.id === id);
-//   const oldUserIndex = Users.indexOf(oldUser);
-//   const { name, login, password} = user;
-//
-//   Users[oldUserIndex].name = name;
-//   Users[oldUserIndex].login = login;
-//   Users[oldUserIndex].password = password;
-//
-//   return Users[oldUserIndex];
-// };
+const update = async (id, board) => {
+  const oldBoard = Boards.find((el) => el.id === id);
+  const oldUBoardIndex = Boards.indexOf(oldBoard);
+
+  Boards[oldUBoardIndex].title = board.title;
+  Boards[oldUBoardIndex].columns = board.columns;
+
+  return Boards[oldUBoardIndex];
+};
 const remove = async (id) => {
   if (Boards.find(board => board.id === id)) {
     const oldUser = Boards.find((el) => el.id === id);
@@ -79,4 +77,4 @@ const remove = async (id) => {
   return false;
 };
 
-module.exports = { getAll, get, create, remove };
+module.exports = { getAll, get, create, remove, update };
