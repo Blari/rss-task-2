@@ -6,7 +6,7 @@ class Board {
     title = 'title',
     columns = [
       {
-        "columnID": uuid(),
+        columnID: uuid(),
         "columnTitle": "string",
         "order": 0
       }
@@ -15,13 +15,6 @@ class Board {
     this.id = id;
     this.title = title;
     this.columns = columns;
-    this.columns = [
-      {
-        "columnID": this.columns[0].columnID,
-        "columnTitle": this.columns[0].columnTitle,
-        "order": 0
-      }
-    ];
   }
 }
 
