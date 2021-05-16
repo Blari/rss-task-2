@@ -12,7 +12,9 @@ router.route('/').get(async (req, res) => {
 });
 
 router.route('/').post(async (req, res) => {
-  const task = await taskService.create(req.body);
+  const boardID = req.baseUrl.split('/')[2];
+  const task = await taskService.create(boardID, req.body);
+
   res.status(201).send(task);
 });
 

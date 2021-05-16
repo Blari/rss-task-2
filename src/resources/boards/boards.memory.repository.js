@@ -1,8 +1,9 @@
 const BoardModel = require('./boards.model');
+const Tasks = require('../tasks/task.memory.repository');
 
 const Boards = [
   {
-    id: '123',
+    id: '1',
     title: 'Works',
     columns: [
       {
@@ -18,7 +19,7 @@ const Boards = [
     ]
   },
   {
-    id: '234',
+    id: '2',
     title: 'Hobby',
     columns: [
       {
@@ -34,7 +35,7 @@ const Boards = [
     ]
   },
   {
-    id: '345',
+    id: '3',
     title: 'Family',
     columns: [
       {
@@ -69,9 +70,15 @@ const update = async (id, board) => {
 };
 const remove = async (id) => {
   if (Boards.find(board => board.id === id)) {
-    const oldUser = Boards.find((el) => el.id === id);
-    const oldUserIndex = Boards.indexOf(oldUser);
-    Boards.splice(oldUserIndex, 1);
+    const oldBoard = Boards.find((el) => el.id === id);
+    Boards.splice(Boards.indexOf(oldBoard), 1);
+
+    const tasksToRemove = Tasks.Tasks.filter(el => el.boardId === id);
+
+    if (tasksToRemove.length > 0) {
+      tasksToRemove.forEach(task => {
+        Tasks.Tasks.splice(Tasks.Tasks.indexOf(task), 1);
+      })}
     return true;
   }
   return false;
